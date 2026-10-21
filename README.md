@@ -37,9 +37,9 @@ docker compose ps
 ```
 
 Open:
-- API health: http://localhost:8000/health
-- Database readiness: http://localhost:8000/health/ready
-- Interactive API docs: http://localhost:8000/docs
+- API health: http://127.0.0.1:8000/health
+- Database readiness: http://127.0.0.1:8000/health/ready
+- Interactive API docs: http://127.0.0.1:8000/docs
 
 In `/docs`, try `POST /api/tasks`, `GET /api/tasks`, and `POST /api/ai/suggest`.
 
@@ -53,9 +53,29 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173
+Open http://127.0.0.1:5173 (or the port shown by Vite, like 5175)
 
-The frontend uses the local API URL from `VITE_API_BASE_URL` (default `http://localhost:8000`).
+The frontend uses the local API URL from `VITE_API_BASE_URL` (default `http://127.0.0.1:8000`).
+
+### 2.1 Real example (tested)
+
+Run these API calls after `docker compose up --build -d`:
+
+```powershell
+$payload = @{ title = 'Prepare interview'; description = 'Revise FastAPI and Docker'; priority = 'high'; status = 'todo' } | ConvertTo-Json
+Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8000/api/tasks" -ContentType "application/json" -Body $payload
+Invoke-RestMethod -Method Get -Uri "http://127.0.0.1:8000/api/tasks"
+Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8000/api/ai/suggest?title=Prepare%20interview"
+```
+
+Expected result (example):
+
+- First call creates a task like `Prepare interview`
+- Second call returns your task list with newest task first
+- Third call returns mock subtasks:
+	- `Plan: Prepare interview`
+	- `Implement: Prepare interview`
+	- `Test and review: Prepare interview`
 
 ### 3. Run backend tests
 

@@ -2,6 +2,23 @@
 
 A beginner-friendly portfolio project using FastAPI, PostgreSQL, Docker Compose, React + Vite, GitHub Actions, and later AWS ECS/ECR + Amplify.
 
+## Purpose (simple)
+
+This project helps you learn how to build and deploy a full-stack app.
+You can use it as a practical template for:
+
+- Creating and tracking tasks
+- Connecting a frontend to a backend API
+- Storing data in PostgreSQL
+- Running locally with Docker
+- Deploying on AWS with modern DevOps flow
+
+## Who should use this
+
+- Students building cloud or DevOps projects
+- Beginners learning FastAPI + React
+- Developers who want a starter for ECS/ECR/Amplify deployment
+
 ## Phase 1: Run locally
 
 Requirements:

@@ -1,0 +1,70 @@
+{
+    "family": "ai-taskpilot-backend",
+    "containerDefinitions": [
+        {
+            "name": "taskpilot-backend",
+            "image": "666601792964.dkr.ecr.ap-south-1.amazonaws.com/ai-task-backend:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp",
+                    "name": "taskpilot-backend",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DB_NAME",
+                    "value": "task-db"
+                },
+                {
+                    "name": "DB_HOST",
+                    "value": "172.31.2.226"
+                },
+                {
+                    "name": "DB_PORT",
+                    "value": "5432"
+                },
+                {
+                    "name": "DB_USER",
+                    "value": "postgres"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "value": "REPLACE_WITH_SECRET_DO_NOT_COMMIT_REAL_PASSWORD"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/ai-taskpilot-backend",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "ap-south-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::666601792964:role/AI-TaskPilot-ECS-Task-Role",
+    "executionRoleArn": "arn:aws:iam::666601792964:role/AI-TaskPilot-ECS-Execution-Role",
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    }
+}
